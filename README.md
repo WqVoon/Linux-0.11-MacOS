@@ -1,11 +1,26 @@
-Linux-0.11
-==========
+# Linux-0.11
 
 The old Linux kernel source ver 0.11 runnable on MacOS, codes were modified to be compiled by moderen i386 elf toolkit.
 
 Tested on `MacOS Sonoma 14.2`.
 
-## Clone Repo
+## TOC
+
+* [Linux-0.11](#linux-011)
+   * [TOC](#toc)
+   * [1. Clone Repo](#1-clone-repo)
+   * [2. Installation](#2-installation)
+      * [Build on MacOS](#build-on-macos)
+         * [MacOS Setup](#macos-setup)
+   * [3. Quick Start](#3-quick-start)
+   * [4. Advanced Usage](#4-advanced-usage)
+      * [Debug](#debug)
+      * [Call Graph](#call-graph)
+         * [Trial](#trial)
+         * [Usage](#usage)
+   * [5. References](#5-references)
+
+## 1. Clone Repo
 
 Clone instruction:
 
@@ -21,7 +36,7 @@ git lfs pull origin main
 
 To download some important large files.
 
-## Installation
+## 2. Installation
 
 ### Build on MacOS
 
@@ -71,7 +86,7 @@ identify logo.gif
 display logo.gif
 ```
 
-## Quick Start
+## 3. Quick Start
 
 ```sh
 make help           // get help
@@ -79,7 +94,7 @@ make                // compile
 make start          // boot it on qemu
 ```
 
-## Advanced Usage
+## 4. Advanced Usage
 
 If you hope to dive deeper into linux, rather than just run and use, check below instructions. **Notice that all scripts shall be executed in root directory.**
 
@@ -150,7 +165,7 @@ display out/[image].[type]
 
 If you encounter errors, please make sure your installation correct. Open issues freely.
 
-## References
+## 5. References
 
 1. [https://gitee.com/ethan-net/linux-0.11-lab](https://gitee.com/ethan-net/linux-0.11-lab)
 2. [https://github.com/yuan-xy/Linux-0.11](https://github.com/yuan-xy/Linux-0.11)
