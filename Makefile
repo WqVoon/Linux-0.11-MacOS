@@ -154,7 +154,7 @@ debug:
 cg: callgraph
 
 callgraph:
-	@./scripts/callgraph.sh -f main -d ./init -b $(BROWSER) -D 10
+	@./scripts/callgraph.sh -f main -d ./init -D 10
 
 help:
 	@echo "<<<<This is the basic help info of linux-0.11>>>"

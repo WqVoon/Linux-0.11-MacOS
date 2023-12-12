@@ -56,7 +56,7 @@ function usage
     echo ""
 }
 
-while getopts "F:f:d:D:o:b:h" opt;
+while getopts "F:f:d:D:o:t:h" opt;
 do
     case $opt in
         F)
@@ -75,9 +75,6 @@ do
             output=$OPTARG
             [ ! -d "$output" ] && mkdir -p $output
             OUT_DIR=$output
-        ;;
-        b)
-            BROWSER=$OPTARG
         ;;
         t)
             PIC_TYPE=$OPTARG

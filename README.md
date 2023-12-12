@@ -8,17 +8,17 @@ Tested on `MacOS Sonoma 14.2`.
 
 * [Linux-0.11](#linux-011)
    * [TOC](#toc)
-   * [1. Clone Repo](#1-clone-repo)
-   * [2. Installation](#2-installation)
+   * [I. Clone Repo](#i-clone-repo)
+   * [II. Installation](#ii-installation)
       * [Build on MacOS](#build-on-macos)
          * [MacOS Setup](#macos-setup)
-   * [3. Quick Start](#3-quick-start)
-   * [4. Advanced Usage](#4-advanced-usage)
-      * [Debug](#debug)
-      * [Call Graph](#call-graph)
-         * [Trial](#trial)
-         * [Usage](#usage)
-   * [5. References](#5-references)
+   * [III. Quick Start](#iii-quick-start)
+   * [IV. Advanced Usage](#iv-advanced-usage)
+      * [1. Debug](#1-debug)
+      * [2. Call Graph](#2-call-graph)
+         * [2.1 Trial](#21-trial)
+         * [2.2 Usage](#22-usage)
+   * [V. References](#v-references)
 
 ## I. Clone Repo
 
