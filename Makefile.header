@@ -6,14 +6,14 @@ ifeq ($(UNAME), Linux)
 	#LDFLAGS = -m elf_i386 -x 
 	LDFLAGS = -m elf_i386
 	CC	= gcc
-	CFLAGS  = -g -m32 -fno-builtin -fno-stack-protector -fomit-frame-pointer -fstrength-reduce #-Wall
+	CFLAGS  = -g -m32 -fno-builtin -fno-stack-protector -fomit-frame-pointer -fstrength-reduce
 
 	CPP	= cpp -nostdinc
 	AR	= ar
 	STRIP = strip
 	OBJCOPY = objcopy
 	# we should use -fno-stack-protector with gcc 4.3
-	gcc_version=$(shell ls -l `which gcc` | tr '-' '\n' | tail -1)
+	gcc_version = $(shell ls -l `which gcc` | tr '-' '\n' | tail -1)
 endif
 
 
@@ -25,7 +25,7 @@ ifeq ($(UNAME), Darwin)
 	LDFLAGS = -m elf_i386
 	#CC	= i386-elf-gcc-4.3.2
 	CC	= i386-elf-gcc
-	CFLAGS  = -gdwarf-2 -g3 -m32 -fno-builtin -fno-stack-protector -fomit-frame-pointer -fstrength-reduce #-Wall
+	CFLAGS  = -gdwarf-2 -g3 -m32 -fno-builtin -fno-stack-protector -fomit-frame-pointer -fstrength-reduce
 
 	#CPP	= i386-elf-cpp-4.3.2 -nostdinc
 	CPP	= i386-elf-cpp -nostdinc
@@ -33,5 +33,3 @@ ifeq ($(UNAME), Darwin)
 	STRIP = i386-elf-strip
 	OBJCOPY = i386-elf-objcopy
 endif
-
-

@@ -16,6 +16,7 @@
 !mm/
 !tools/
 !tools/**
+!scripts/
 
 !**.S
 !**.S
@@ -23,3 +24,5 @@
 !**.h
 !**.md
 !**.sh
+
+**.DS_Store

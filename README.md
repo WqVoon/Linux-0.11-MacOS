@@ -1,9 +1,9 @@
 Linux-0.11
 ==========
 
-Modified project setup from [https://github.com/yuan-xy/Linux-0.11/blob/master](https://github.com/yuan-xy/Linux-0.11/blob/master)
+The old Linux kernel source ver 0.11 runnable on modern Linux and Mac OSX.
 
-The old Linux kernel source ver 0.11 which has been tested under modern Linux,  Mac OSX and Windows.
+## Clone Repo
 
 Clone instruction:
 
@@ -11,62 +11,141 @@ Clone instruction:
 git lfs clone git@github.com:ETOgaosion/linux.git
 ```
 
-## 1. Build on Linux
-
-### 1.1. Linux Setup
-
-* a linux distribution: debian , ubuntu and mint are recommended
-* some tools: gcc gdb qemu
-* a linux-0.11 hardware image file: hdc-0.11.img, please download it from http://www.oldlinux.org, or http://mirror.lzu.edu.cn/os/oldlinux.org/, ant put it in the root directory.
-* Now, This version already support the Ubuntu 16.04, enjoy it.
-
-### 1.2. linux-0.11 playground
+Or, if you have cloned already, use:
 
 ```sh
-make help		// get help
-make  		    // compile
-make start		// boot it on qemu
-make debug		// debug it via qemu & gdb, you'd start gdb to connect it.
+git lfs pull origin main
 ```
 
-```sh
-gdb tools/system
-(gdb) target remote :1234
-(gdb) b main
-(gdb) c
-```
+To download some important large files.
 
-## 2. Build on Mac OS X
+## Installation
 
-### 2.1. Mac OS X Setup
+### Build on Linux
 
-* install cross compiler gcc, gdb and binutils
+#### Linux Setup
+
+- a linux distribution: debian/ubuntu are recommended
+- some tools: gcc gdb qemu [inkscape](https://inkscape.org/release/) [imagemagick](https://imagemagick.org/script/download.php#linux)
+- [optional] a linux-0.11 hardware image file(we have offered one): hdc-0.11.img, you can download it from http://www.oldlinux.org, or http://mirror.lzu.edu.cn/os/oldlinux.org/, and put it in the root directory.
+
+### Build on MacOS
+
+#### MacOS Setup
+
+1. install cross compiler gcc, gdb and binutils
 
 ```sh
 brew tap nativeos/i386-elf-toolchain
 brew install i386-elf-binutils i386-elf-gcc
+brew install i386-elf-gdb
 ```
 
-* install qemu
-* install gdb. you need download the gdb source and compile it to use gdb because port doesn't provide i386-elf-gdb, or you can use the pre-compiled gdb in the tools directory.
-* a linux-0.11 hardware image file: hdc-0.11.img
+2. install qemu
 
 ```sh
 brew install qemu
 ```
 
-optional
+3. [optional] a linux-0.11 hardware image file(we have offered one): hdc-0.11.img
+4. [optional] download [inkscape](https://inkscape.org/release/), and to use command-line tool:
+
 ```sh
-wget ftp://ftp.gnu.org/gnu/gdb/gdb-7.4.tar.bz2
-tar -xzvf gdb-7.4.tar.bz2
-cd gdb-7.4
-./configure --target=i386-elf
-make
+ln -s /Applications/Inkscape.app/Contents/MacOS/inkscape \
+      /usr/local/bin/inkscape
 ```
 
-### 2.2. linux-0.11 playground
-same as section 1.2
+5. [optional] download [imagemagick](https://imagemagick.org/script/download.php#macosx), but don't follow their command line instructions(without X11 support), use below commands:
 
+```sh
+brew tap tlk/imagemagick-x11
+brew install tlk/imagemagick-x11/imagemagick
+```
 
-## 3. Build on Windows
-todo...
+set `DISPLAY` env variable:
+
+```sh
+echo 'export DISPLAY=:0' > ~/.[shell]rc
+source ~/.[shell]rc
+```
+
+verify installation, as offically documented:
+
+```sh
+magick logo: logo.gif
+identify logo.gif
+display logo.gif
+```
+
+## Quick Start
+
+```sh
+make help           // get help
+make                // compile
+make start          // boot it on qemu
+```
+
+## Advanced Usage
+
+If you hope to dive deeper into linux, rather than just run and use, check below instructions. **Notice that all scripts shall be executed in root directory.**
+
+### Debug
+
+In one terminal:
+
+```sh
+make debug          // debug it via qemu & gdb, you'd start gdb to connect it.
+```
+
+In the other:
+
+```sh
+gdb tools/system
+(gdb) add-symbol-file boot/bootsect.o
+(gdb) b start
+(gdb) c
+(gdb) remove-symbol-file boot/bootsect.o
+(gdb) b main
+(gdb) c
+```
+
+### Call Graph
+
+#### Trial
+
+Use `make cg` to generate `main` function's call graph like below:
+
+![]
+
+#### Usage
+
+```sh
+./scripts/callgraph.sh -f [func_name] -d [directory]  -F [filterstr] -D [depth] -o [directory] -t [output_format_type]
+
+# Output: out/func.dir_file_name.svg
+```
+
+If you want to directly convert picture to other format, we recommand you try [inkscape](https://inkscape.org/release/)
+
+```sh
+inkscape -w [width] -h [height] out/[src_image].[src_type] -o out/[dest_image].[dest_type]
+```
+
+Or if you only installed [imagemagick](https://imagemagick.org/script/download.php)
+
+```sh
+convert -density [density] -background none -resize [width]x[height] out/[src_image].[src_type] out/[dest_image].[dest_type]
+```
+
+And if you want to display image:
+
+```sh
+display out/[image].[type]
+```
+
+If you encounter errors, please make sure your installation correct. Open issues freely.
+
+## References
+
+[1] [https://gitee.com/ethan-net/linux-0.11-lab](https://gitee.com/ethan-net/linux-0.11-lab)
+[2] [https://github.com/yuan-xy/Linux-0.11](https://github.com/yuan-xy/Linux-0.11)
