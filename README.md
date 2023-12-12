@@ -147,5 +147,5 @@ If you encounter errors, please make sure your installation correct. Open issues
 
 ## References
 
-[1] [https://gitee.com/ethan-net/linux-0.11-lab](https://gitee.com/ethan-net/linux-0.11-lab)
-[2] [https://github.com/yuan-xy/Linux-0.11](https://github.com/yuan-xy/Linux-0.11)
+1. [https://gitee.com/ethan-net/linux-0.11-lab](https://gitee.com/ethan-net/linux-0.11-lab)
+2. [https://github.com/yuan-xy/Linux-0.11](https://github.com/yuan-xy/Linux-0.11)
