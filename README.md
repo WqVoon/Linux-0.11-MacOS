@@ -25,7 +25,7 @@ Tested on `MacOS Sonoma 14.2`.
 Clone instruction:
 
 ```sh
-git lfs clone https://github.com/ETOgaosion/linux-0.11-MacOS.git
+git lfs clone https://github.com/ETOgaosion/Linux-0.11-MacOS.git
 ```
 
 Or, if you have cloned already, use:
