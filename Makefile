@@ -32,7 +32,7 @@ DRIVERS =kernel/blk_drv/blk_drv.a kernel/chr_drv/chr_drv.a
 MATH	=kernel/math/math.a
 LIBS	=lib/lib.a
 
-.PHONY: .c.s .s.o .c.o all prepare dump disk clean distclean backup dep start debug cg callgraph help
+.PHONY: .c.s .s.o .c.o all check prepare dump disk clean distclean backup dep start debug cg callgraph help
 
 .c.s:
 	@$(CC) $(CFLAGS) -S -o $*.s $<
@@ -41,7 +41,16 @@ LIBS	=lib/lib.a
 .c.o:
 	@$(CC) $(CFLAGS) -c -o $*.o $<
 
-all:	prepare $(IMAGE) dump
+all:	check prepare $(IMAGE) dump
+
+check:
+	@echo "Running on OS: $(UNAME)"
+	@if [ $(UNAME) != "Darwin" ]; then \
+		echo "We only support MacOS"; \
+		exit 1; \
+	else \
+		echo "$(UNAME) OS is supported"; \
+	fi
 
 prepare:
 	@mkdir -p build

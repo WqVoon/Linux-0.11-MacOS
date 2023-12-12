@@ -1,14 +1,16 @@
 Linux-0.11
 ==========
 
-The old Linux kernel source ver 0.11 runnable on modern Linux and Mac OSX.
+The old Linux kernel source ver 0.11 runnable on MacOS, codes were modified to be compiled by moderen i386 elf toolkit.
+
+Tested on `MacOS Sonoma 14.2`.
 
 ## Clone Repo
 
 Clone instruction:
 
 ```sh
-git lfs clone git@github.com:ETOgaosion/linux.git
+git lfs clone https://github.com/ETOgaosion/linux-0.11-MacOS.git
 ```
 
 Or, if you have cloned already, use:
@@ -20,14 +22,6 @@ git lfs pull origin main
 To download some important large files.
 
 ## Installation
-
-### Build on Linux
-
-#### Linux Setup
-
-- a linux distribution: debian/ubuntu are recommended
-- some tools: gcc gdb qemu [inkscape](https://inkscape.org/release/) [imagemagick](https://imagemagick.org/script/download.php#linux)
-- [optional] a linux-0.11 hardware image file(we have offered one): hdc-0.11.img, you can download it from http://www.oldlinux.org, or http://mirror.lzu.edu.cn/os/oldlinux.org/, and put it in the root directory.
 
 ### Build on MacOS
 
@@ -47,7 +41,7 @@ brew install i386-elf-gdb
 brew install qemu
 ```
 
-3. [optional] a linux-0.11 hardware image file(we have offered one): hdc-0.11.img
+3. [optional] a linux-0.11 hardware image file(we have offered one): hdc-0.11.img, you can download it from http://www.oldlinux.org, or http://mirror.lzu.edu.cn/os/oldlinux.org/, and put it in the root directory.
 4. [optional] download [inkscape](https://inkscape.org/release/), and to use command-line tool:
 
 ```sh
@@ -120,7 +114,12 @@ Use `make cg` to generate `main` function's call graph like below:
 #### Usage
 
 ```sh
-./scripts/callgraph.sh -f [func_name] -d [directory]  -F [filterstr] -D [depth] -o [directory] -t [output_format_type]
+./scripts/callgraph.sh -f [func_name] \
+                       -d [directory] \
+                       -F [filterstr] \
+                       -D [depth] \
+                       -o [directory] \
+                       -t [output_format_type]
 
 # Output: out/func.dir_file_name.svg
 ```
@@ -128,13 +127,19 @@ Use `make cg` to generate `main` function's call graph like below:
 If you want to directly convert picture to other format, we recommand you try [inkscape](https://inkscape.org/release/)
 
 ```sh
-inkscape -w [width] -h [height] out/[src_image].[src_type] -o out/[dest_image].[dest_type]
+inkscape -w [width] -h [height] \
+         out/[src_image].[src_type] \
+         -o out/[dest_image].[dest_type]
 ```
 
 Or if you only installed [imagemagick](https://imagemagick.org/script/download.php)
 
 ```sh
-convert -density [density] -background none -resize [width]x[height] out/[src_image].[src_type] out/[dest_image].[dest_type]
+convert -density [density] \
+        -background none \
+        -resize [width]x[height] \
+        out/[src_image].[src_type] \
+        out/[dest_image].[dest_type]
 ```
 
 And if you want to display image:
