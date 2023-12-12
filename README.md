@@ -20,7 +20,7 @@ Tested on `MacOS Sonoma 14.2`.
          * [Usage](#usage)
    * [5. References](#5-references)
 
-## 1. Clone Repo
+## I. Clone Repo
 
 Clone instruction:
 
@@ -36,7 +36,7 @@ git lfs pull origin main
 
 To download some important large files.
 
-## 2. Installation
+## II. Installation
 
 ### Build on MacOS
 
@@ -56,15 +56,15 @@ brew install i386-elf-gdb
 brew install qemu
 ```
 
-3. [optional] a linux-0.11 hardware image file(we have offered one): hdc-0.11.img, you can download it from http://www.oldlinux.org, or http://mirror.lzu.edu.cn/os/oldlinux.org/, and put it in the root directory.
-4. [optional] download [inkscape](https://inkscape.org/release/), and to use command-line tool:
+3. [*optional*] a linux-0.11 hardware image file(we have offered one): hdc-0.11.img, you can download it from http://www.oldlinux.org, or http://mirror.lzu.edu.cn/os/oldlinux.org/, and put it in the root directory.
+4. [*optional*] download [inkscape](https://inkscape.org/release/), and to use command-line tool:
 
 ```sh
 ln -s /Applications/Inkscape.app/Contents/MacOS/inkscape \
       /usr/local/bin/inkscape
 ```
 
-5. [optional] download [imagemagick](https://imagemagick.org/script/download.php#macosx), but don't follow their command line instructions(without X11 support), use below commands:
+5. [*optional*] download [imagemagick](https://imagemagick.org/script/download.php#macosx), but don't follow their command line instructions(without X11 support), use below commands:
 
 ```sh
 brew tap tlk/imagemagick-x11
@@ -86,7 +86,7 @@ identify logo.gif
 display logo.gif
 ```
 
-## 3. Quick Start
+## III. Quick Start
 
 ```sh
 make help           // get help
@@ -94,11 +94,11 @@ make                // compile
 make start          // boot it on qemu
 ```
 
-## 4. Advanced Usage
+## IV. Advanced Usage
 
 If you hope to dive deeper into linux, rather than just run and use, check below instructions. **Notice that all scripts shall be executed in root directory.**
 
-### Debug
+### 1. Debug
 
 In one terminal:
 
@@ -118,15 +118,15 @@ gdb tools/system
 (gdb) c
 ```
 
-### Call Graph
+### 2. Call Graph
 
-#### Trial
+#### 2.1 Trial
 
 Use `make cg` to generate `main` function's call graph like below:
 
-![]
+![call graph](assets/main.__init_main_c.png)
 
-#### Usage
+#### 2.2 Usage
 
 ```sh
 ./scripts/callgraph.sh -f [func_name] \
@@ -165,7 +165,7 @@ display out/[image].[type]
 
 If you encounter errors, please make sure your installation correct. Open issues freely.
 
-## 5. References
+## V. References
 
 1. [https://gitee.com/ethan-net/linux-0.11-lab](https://gitee.com/ethan-net/linux-0.11-lab)
 2. [https://github.com/yuan-xy/Linux-0.11](https://github.com/yuan-xy/Linux-0.11)

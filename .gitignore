@@ -17,6 +17,8 @@
 !tools/
 !tools/**
 !scripts/
+!assets/
+!assets/**
 
 !**.S
 !**.S
