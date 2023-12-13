@@ -42,7 +42,7 @@ To download some important large files.
 
 #### MacOS Setup
 
-1. install cross compiler gcc, gdb and binutils
+1. Install cross compiler gcc, gdb and binutils
 
 ```sh
 brew tap nativeos/i386-elf-toolchain
@@ -50,21 +50,21 @@ brew install i386-elf-binutils i386-elf-gcc
 brew install i386-elf-gdb
 ```
 
-2. install qemu
+2. Install qemu
 
 ```sh
 brew install qemu
 ```
 
-3. [*optional*] a linux-0.11 hardware image file(we have offered one): hdc-0.11.img, you can download it from http://www.oldlinux.org, or http://mirror.lzu.edu.cn/os/oldlinux.org/, and put it in the root directory.
-4. [*optional*] download [inkscape](https://inkscape.org/release/), and to use command-line tool:
+3. [*optional*] A linux-0.11 hardware image file(we have offered one): hdc-0.11.img, you can download it from http://www.oldlinux.org, or http://mirror.lzu.edu.cn/os/oldlinux.org/, and put it in the root directory.
+4. [*optional*] Download [inkscape](https://inkscape.org/release/), and to use command-line tool:
 
 ```sh
 ln -s /Applications/Inkscape.app/Contents/MacOS/inkscape \
       /usr/local/bin/inkscape
 ```
 
-5. [*optional*] download [imagemagick](https://imagemagick.org/script/download.php#macosx), but don't follow their command line instructions(without X11 support), use below commands:
+5. [*optional*] Download [imagemagick](https://imagemagick.org/script/download.php#macosx), but don't follow their command line instructions(without X11 support), use below commands:
 
 ```sh
 brew tap tlk/imagemagick-x11
@@ -78,9 +78,9 @@ echo 'export DISPLAY=:0' > ~/.[shell]rc
 source ~/.[shell]rc
 ```
 
-Remember to download [XQuartz](https://www.xquartz.org), and open it in background.
+Remember to Download [XQuartz](https://www.xquartz.org), and open it in background.
 
-verify installation, as offically documented:
+Then verify installation, as offically documented:
 
 ```sh
 magick logo: logo.gif
