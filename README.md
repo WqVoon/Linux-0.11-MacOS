@@ -1,4 +1,4 @@
-# Linux-0.11
+# Linux-0.11 MacOS
 
 The old Linux kernel source ver 0.11 runnable on MacOS, codes were modified to be compiled by modern i386 elf toolkit.
 
@@ -77,6 +77,8 @@ set `DISPLAY` env variable:
 echo 'export DISPLAY=:0' > ~/.[shell]rc
 source ~/.[shell]rc
 ```
+
+Remember to download [XQuartz](https://www.xquartz.org), and open it in background.
 
 verify installation, as offically documented:
 
