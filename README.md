@@ -1,6 +1,6 @@
 # Linux-0.11
 
-The old Linux kernel source ver 0.11 runnable on MacOS, codes were modified to be compiled by moderen i386 elf toolkit.
+The old Linux kernel source ver 0.11 runnable on MacOS, codes were modified to be compiled by modern i386 elf toolkit.
 
 Tested on `MacOS Sonoma 14.2`.
 
