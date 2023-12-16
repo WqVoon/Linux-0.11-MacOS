@@ -8,15 +8,23 @@
 !hdc-0.11.img
 
 !boot/
+!boot/**
 !fs/
+!fs/**
 !include/
+!include/**
 !init/
+!init/**
 !kernel/
+!kernel/**
 !lib/
+!lib/**
 !mm/
+!mm/**
 !tools/
 !tools/**
 !scripts/
+!scripts/**
 !assets/
 !assets/**
 
@@ -26,5 +34,10 @@
 !**.h
 !**.md
 !**.sh
+
+*.o
+*.a
+boot/bootsect
+boot/setup
 
 **.DS_Store
