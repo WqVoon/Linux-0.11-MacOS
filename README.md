@@ -1,173 +1,38 @@
 # Linux-0.11 on MacOS
+从 https://github.com/ETOgaosion/Linux-0.11-MacOS 克隆过来，修改了一些文件让源码可以编译和运行在我的 MacOS（13.6 (22G120)） 上（原仓库的 hdc 镜像和 gcc 的入参似乎有问题，导致我的设备无法顺利运行）
 
-The old Linux kernel source ver 0.11 runnable on MacOS, codes were modified to be compiled by modern i386 elf toolkit.
-
-Tested on `MacOS Sonoma 14.2`.
-
-## TOC
-
-* [Linux-0.11](#linux-011)
-   * [TOC](#toc)
-   * [I. Clone Repo](#i-clone-repo)
-   * [II. Installation](#ii-installation)
-      * [Build on MacOS](#build-on-macos)
-         * [MacOS Setup](#macos-setup)
-   * [III. Quick Start](#iii-quick-start)
-   * [IV. Advanced Usage](#iv-advanced-usage)
-      * [1. Debug](#1-debug)
-      * [2. Call Graph](#2-call-graph)
-         * [2.1 Trial](#21-trial)
-         * [2.2 Usage](#22-usage)
-   * [V. References](#v-references)
-
-## I. Clone Repo
-
-Clone instruction:
-
-```sh
-git lfs clone https://github.com/ETOgaosion/Linux-0.11-MacOS.git
-```
-
-Or, if you have cloned already, use:
-
-```sh
-git lfs pull origin main
-```
-
-To download some important large files.
-
-## II. Installation
-
-### Build on MacOS
-
-#### MacOS Setup
-
-1. Install cross compiler gcc, gdb and binutils
-
-```sh
-brew tap nativeos/i386-elf-toolchain
+# mac 环境依赖
+```shell
+# 安装编译套件、gdb
 brew install i386-elf-binutils i386-elf-gcc
 brew install i386-elf-gdb
-```
 
-2. Install qemu
-
-```sh
+# 安装 qemu
 brew install qemu
+
+# 安装 bochs
+brew install bochs
+
+# 设置 bochs 的环境变量，在我的设备上，xxx 为 /usr/local/Cellar/bochs/2.8/share
+export BXSHARE=xxx
 ```
 
-3. [*optional*] A linux-0.11 hardware image file(we have offered one): hdc-0.11.img, you can download it from http://www.oldlinux.org, or http://mirror.lzu.edu.cn/os/oldlinux.org/, and put it in the root directory.
-4. [*optional*] Download [inkscape](https://inkscape.org/release/), and to use command-line tool:
+# 基本操作
+```shell
+make # 编译源码
+make start # 使用 qemu 运行内核
+make bochs # 使用 bochs 运行内核
 
-```sh
-ln -s /Applications/Inkscape.app/Contents/MacOS/inkscape \
-      /usr/local/bin/inkscape
+# 更多说明见原仓库的 readme：README.backup.md 文件，或直接看根目录下的 Makefile
 ```
 
-5. [*optional*] Download [imagemagick](https://imagemagick.org/script/download.php#macosx), but don't follow their command line instructions(without X11 support), use below commands:
-
-```sh
-brew tap tlk/imagemagick-x11
-brew install tlk/imagemagick-x11/imagemagick
-```
-
-set `DISPLAY` env variable:
-
-```sh
-echo 'export DISPLAY=:0' > ~/.[shell]rc
-source ~/.[shell]rc
-```
-
-Remember to Download [XQuartz](https://www.xquartz.org), and open it in background.
-
-Then verify installation, as offically documented:
-
-```sh
-magick logo: logo.gif
-identify logo.gif
-display logo.gif
-```
-
-## III. Quick Start
-
-```sh
-make help           // get help
-make                // compile
-make start          // boot it on qemu
-```
-
-## IV. Advanced Usage
-
-If you hope to dive deeper into linux, rather than just run and use, check below instructions. **Notice that all scripts shall be executed in root directory.**
-
-### 1. Debug
-
-In one terminal:
-
-```sh
-make debug          // debug it via qemu & gdb, you'd start gdb to connect it.
-```
-
-In the other:
-
-```sh
-gdb tools/system
-(gdb) add-symbol-file boot/bootsect.o
-(gdb) b start
-(gdb) c
-(gdb) remove-symbol-file boot/bootsect.o
-(gdb) b main
-(gdb) c
-```
-
-### 2. Call Graph
-
-#### 2.1 Trial
-
-Use `make cg` to generate `main` function's call graph like below:
-
-![call graph](assets/main.__init_main_c.png)
-
-#### 2.2 Usage
-
-```sh
-./scripts/callgraph.sh -f [func_name] \
-                       -d [directory] \
-                       -F [filterstr] \
-                       -D [depth] \
-                       -o [directory] \
-                       -t [output_format_type]
-
-# Output: out/func.dir_file_name.svg
-```
-
-If you want to directly convert picture to other format, we recommand you try [inkscape](https://inkscape.org/release/)
-
-```sh
-inkscape -w [width] -h [height] \
-         out/[src_image].[src_type] \
-         -o out/[dest_image].[dest_type]
-```
-
-Or if you only installed [imagemagick](https://imagemagick.org/script/download.php)
-
-```sh
-convert -density [density] \
-        -background none \
-        -resize [width]x[height] \
-        out/[src_image].[src_type] \
-        out/[dest_image].[dest_type]
-```
-
-And if you want to display image:
-
-```sh
-display out/[image].[type]
-```
-
-If you encounter errors, please make sure your installation correct. Open issues freely.
-
-## V. References
-
-1. [https://gitee.com/ethan-net/linux-0.11-lab](https://gitee.com/ethan-net/linux-0.11-lab)
-2. [https://github.com/yuan-xy/Linux-0.11](https://github.com/yuan-xy/Linux-0.11)
+# 一些调试时可以参考的文件
+执行编译后，./out 目录下会出现以下文件，断点调试时可参考
+- bootsect.dump
+  - bootsect.s 的反汇编文件，包含源码和地址，作为 MBR
+- setup.dump
+  - setup.s 的反汇编文件，包含源码和地址，被 MBR 加载（0x90200 是起始地址）
+- system.dump
+  - head.s + 其他源码编译后的内核反汇编文件
+- system.map
+  - 内核的符号地址，如 0x6738 是 main 函数的地址（刚好 boot 阶段挪来挪去后 system 的起始地址是 0）

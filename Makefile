@@ -151,6 +151,9 @@ start:
 debug:
 	@qemu-system-x86_64 -m 16M -boot a -fda $(IMAGE) -hda $(HDA_IMG) -s -S
 
+bochs:
+	@bochs -f bochs.conf
+
 cg: callgraph
 
 callgraph:
