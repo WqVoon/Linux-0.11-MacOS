@@ -58,8 +58,8 @@ prepare:
 
 dump:
 	@objdump -S build/system > out/system.dump
-	@objdump -S boot/bootsect.o > out/bootsect.dump
-	@objdump -S boot/setup.o > out/setup.dump
+	@ndisasm -b 16 boot/bootsect > out/bootsect.dump
+	@ndisasm -b 16 boot/setup > out/setup.dump
 
 $(IMAGE): boot/bootsect boot/setup build/system
 	@cp -f build/system build/system.tmp
@@ -107,11 +107,11 @@ fs/fs.o:
 lib/lib.a:
 	@make -C lib
 
-boot/setup: boot/setup.s
-	@make setup -C boot
+boot/setup: boot/setup.asm
+	make setup -C boot
 
-boot/bootsect: boot/bootsect.s
-	@make bootsect -C boot
+boot/bootsect: boot/bootsect.asm
+	make bootsect -C boot
 
 tmp.s:	boot/bootsect.s build/system
 	@(echo -n "SYSSIZE = (";ls -l build/system | grep system \
@@ -150,9 +150,6 @@ start:
 
 debug:
 	@qemu-system-x86_64 -m 16M -boot a -fda $(IMAGE) -hda $(HDA_IMG) -s -S
-
-bochs:
-	@bochs -f bochs.conf
 
 cg: callgraph
 

@@ -4,16 +4,11 @@ LDFLAGS	+= -Ttext 0
 
 all: bootsect setup
 
-bootsect: bootsect.s
-	@$(AS) -g -o bootsect.o bootsect.s
-	@$(LD) $(LDFLAGS) -o bootsect bootsect.o
-	@$(OBJCOPY) -R .pdr -R .comment -R.note -S -O binary bootsect
+bootsect: bootsect.asm
+	@nasm bootsect.asm -o bootsect
 
-
-setup: setup.s
-	@$(AS) -g -o setup.o setup.s
-	@$(LD) $(LDFLAGS) -o setup setup.o
-	@$(OBJCOPY) -R .pdr -R .comment -R.note -S -O binary setup
+setup: setup.asm
+	@nasm setup.asm -o setup
 
 head.o: head.s
 	@$(AS) -o head.o head.s
