@@ -146,10 +146,13 @@ dep:
 	@for i in fs kernel mm; do make dep -C $$i; done
 
 start:
-	@qemu-system-x86_64 -m 16M -boot a -fda $(IMAGE) -hda $(HDA_IMG)
+	@qemu-system-i386 -m 16M -boot a -fda $(IMAGE) -hda $(HDA_IMG)
 
 debug:
-	@qemu-system-x86_64 -m 16M -boot a -fda $(IMAGE) -hda $(HDA_IMG) -s -S
+	@qemu-system-i386 -m 16M -boot a -fda $(IMAGE) -hda $(HDA_IMG) -s -S
+
+gdb: # 删掉了原仓库的 .gdbinit，所以需要在启动时主动增加额外的命令
+	@gdb -ex 'target remote :1234' ./build/system
 
 bochs:
 	@bochs -f bochs.conf

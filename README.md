@@ -26,6 +26,16 @@ make bochs # 使用 bochs 运行内核
 # 更多说明见原仓库的 readme：README.backup.md 文件，或直接看根目录下的 Makefile
 ```
 
+# 调试代码
+```shell
+make debug # 以 debug 模式运行 qemu
+
+# 直接用 gdb 调试
+make gdb
+
+# 或用 vscode 打开代码，在 debugger 中运行 `kernel-debug`，需要确保 qemu 是运行着的
+```
+
 # 一些调试时可以参考的文件
 执行编译后，./out 目录下会出现以下文件，断点调试时可参考
 - bootsect.dump
